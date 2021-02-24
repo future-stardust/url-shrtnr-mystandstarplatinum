@@ -1,17 +1,18 @@
-# {Team Name} - URL shortener {🧪}
+# MyStandStarplatinum - 🐸 URL shortener 🤡
 
-This is a template project for "Software testing" course labs. Use it to create your own repo and 
-fulfill/rewrite this document (at least, replace everything in `{...}`).
+![pepe](pepe.png)
 
 ## Students group
 
-- {Surname Name (in Ukrainian)} {email}
-- ...
-- {Surname Name (in Ukrainian)} {email}
+- Киба Олег vestigor0@gmail.com
+- Коренєв Олександр alexkorienev@gmail.com
+- Косарева Анастасія asya.kosareva666@gmail.com
+- Овчарова Юстіна jusovch2000@gmail.com
+- Яснов Антон maza4aka.ay@gmail.com
 
 ## Design document
 
-The [design document]({Place actual link to the design document Google Docs file here}) that
+The [дезігн документ](https://docs.google.com/document/d/1QdflGni8_XO7jS-2A2uZLWkkJb8PHfvWViWKaM723yU/edit) that
 describes architecture and implementation details of this project.
 
 ### System structure
