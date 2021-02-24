@@ -1,4 +1,4 @@
-# MyStandStarplatinum - 🐸 URL shortener 🤡
+# MyStandStarPlatinum - 🐸 URL shortener 🤡
 
 ![pepe](pepe.png)
 
