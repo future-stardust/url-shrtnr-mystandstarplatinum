@@ -11,4 +11,9 @@ class HelloTest {
     assertThat(1).isEqualTo(1);
   }
 
+  @Test
+  void simpleAlwaysGreenTest2() {
+    assertThat(2).isEqualTo(2);
+  }
+
 }
