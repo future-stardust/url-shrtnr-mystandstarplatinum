@@ -66,4 +66,9 @@ public class NamespaceTest {
     assertThat(result).isTrue();
     assertThat(result2).isNull();
   }
+
+  @Test
+  void testFails() {
+    assertThat(true).isFalse();
+  }
 }
