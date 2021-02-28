@@ -22,7 +22,7 @@ public class NamespaceImpl implements Namespace {
 
   @Override
   public byte[] get(String key) {
-    HashParts hashParts = HashParts.from(key);
+    HashParts hashParts = new HashParts(key);
     Segment segment;
 
     segment = hashtable.get(hashParts.getHigh());
@@ -35,7 +35,7 @@ public class NamespaceImpl implements Namespace {
 
   @Override
   public boolean set(String key, byte[] value) {
-    HashParts hashParts = HashParts.from(key);
+    HashParts hashParts = new HashParts(key);
 
     Segment segment = hashtable.get(hashParts.getHigh());
     boolean alreadyPresent = false;
@@ -53,7 +53,7 @@ public class NamespaceImpl implements Namespace {
 
   @Override
   public boolean delete(String key) {
-    HashParts hashParts = HashParts.from(key);
+    HashParts hashParts = new HashParts(key);
 
     Segment segment = hashtable.get(hashParts.getHigh());
     if (segment == null) {

@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public class StorageImpl implements Storage {
 
-  private final ArrayList<NamespaceImpl> namespaces;
+  private final ArrayList<Namespace> namespaces;
 
   public StorageImpl() {
     namespaces = new ArrayList<>();
