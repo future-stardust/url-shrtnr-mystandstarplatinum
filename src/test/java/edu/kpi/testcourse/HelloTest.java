@@ -16,4 +16,7 @@ class HelloTest {
     assertThat(2).isEqualTo(2);
   }
 
+  @Test
+  void simpleAlwaysRedTest() { assertThat(2).isEqualTo(1); }
+
 }
