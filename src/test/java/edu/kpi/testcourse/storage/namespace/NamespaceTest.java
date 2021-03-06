@@ -66,4 +66,50 @@ public class NamespaceTest {
     assertThat(result).isTrue();
     assertThat(result2).isNull();
   }
+
+  @Test
+  void testSegmentBecomesModifiedOnSet() {
+    var ns = new NamespaceImpl("default");
+    var data = new byte[10];
+    ns.set("key", data);
+
+    var result = ns.popModified();
+
+    assertThat(result.length).isEqualTo(1);
+  }
+
+  @Test
+  void testModifiedListBecomesEmptyAfterPop() {
+    var ns = new NamespaceImpl("default");
+    var data = new byte[10];
+    ns.set("key", data);
+
+    var result = ns.popModified();
+    var result2 = ns.popModified();
+
+    assertThat(result.length).isEqualTo(1);
+    assertThat(result2.length).isEqualTo(0);
+  }
+
+  @Test
+  void testSegmentBecomesModifiedOnExistingDelete() {
+    var ns = new NamespaceImpl("default");
+    var data = new byte[10];
+    ns.set("key", data);
+    ns.popModified(); // make it empty
+    ns.delete("key");
+
+    var result = ns.popModified();
+
+    assertThat(result.length).isEqualTo(1);
+  }
+
+  @Test
+  void testDeleteNonExistingKeyDoesNotMarkSegmentModified() {
+    var ns = new NamespaceImpl("default");
+
+    var result = ns.popModified();
+
+    assertThat(result.length).isEqualTo(0);
+  }
 }
