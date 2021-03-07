@@ -1,5 +1,8 @@
 package edu.kpi.testcourse.storage.namespace;
 
+import edu.kpi.testcourse.storage.StorageConfig;
+import io.micronaut.context.ApplicationContext;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Hashtable;
@@ -16,6 +19,7 @@ public class NamespaceImpl implements Namespace {
   private final Hashtable<Integer, Segment> hashtable;
   private final Set<Integer> modifiedSegments;
   private final Lock housekeepingLock;
+  private final ApplicationContext appContext = ApplicationContext.run();
 
   /**
    * Creates namespace with given name.
@@ -96,5 +100,21 @@ public class NamespaceImpl implements Namespace {
     this.modifiedSegments.clear();
     housekeepingLock.unlock();
     return modifiedSegments;
+  }
+
+  String getDataPath() {
+    StorageConfig config = appContext.getBean(StorageConfig.class);
+    return Paths.get(config.getDataDir(), name).toString();
+  }
+
+  /**
+   * Get segment (for housekeeping purposes).
+   *
+   * @param number of segment.
+   *
+   * @return Segment or null.
+   */
+  Segment getSegment(Integer number) {
+    return hashtable.get(number);
   }
 }

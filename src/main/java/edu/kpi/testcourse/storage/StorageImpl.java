@@ -4,6 +4,7 @@ import edu.kpi.testcourse.storage.namespace.Namespace;
 import edu.kpi.testcourse.storage.namespace.NamespaceBackgroundSave;
 import edu.kpi.testcourse.storage.namespace.NamespaceImpl;
 import io.micronaut.context.ApplicationContext;
+import io.micronaut.context.BeanContext;
 import io.micronaut.scheduling.TaskScheduler;
 import java.time.Duration;
 import java.util.ArrayList;
@@ -28,9 +29,13 @@ public class StorageImpl implements Storage {
     logger.info("[Thread {}] Initializing storage", Thread.currentThread().getId());
 
     this.appContext = ApplicationContext.run();
+    BeanContext beanContext = BeanContext.run();
+
     StorageConfig config = appContext.getBean(StorageConfig.class);
-    logger.info("[Thread {}] dataDir   {}", Thread.currentThread().getId(), config.getDataDir());
-    logger.info("[Thread {}] backupDir {}", Thread.currentThread().getId(), config.getBackupDir());
+    FileSystemLayer fsLayer = beanContext.getBean(FileSystemLayer.class);
+
+    fsLayer.mkdir(config.getDataDir());
+    fsLayer.mkdir(config.getBackupDir());
 
     namespaces = new ArrayList<>();
     logger.info("[Thread {}] Storage initialized", Thread.currentThread().getId());
