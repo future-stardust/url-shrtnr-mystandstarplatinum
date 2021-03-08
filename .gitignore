@@ -42,3 +42,4 @@ local.properties
 
 # Serialized Object File
 *.ser
+*.ser.tmp

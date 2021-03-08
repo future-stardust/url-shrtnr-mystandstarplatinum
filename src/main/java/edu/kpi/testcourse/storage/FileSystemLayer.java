@@ -36,7 +36,7 @@ public class FileSystemLayer {
   }
 
   /**
-   * Writes data to ${filename}-tmp.ser, replaces original file, then deletes temporary file.
+   * Writes data to ${filename}.tmp, replaces original file, then deletes temporary file.
    * data is locked while serializing.
    *
    * @param basePath directory which contains required file
@@ -48,7 +48,7 @@ public class FileSystemLayer {
       String fileName,
       LockedSerializable data
   ) {
-    final Path temp = Paths.get(basePath, String.format("%s-tmp", fileName));
+    final Path temp = Paths.get(basePath, String.format("%s.tmp", fileName));
     final Path original = Paths.get(basePath, fileName);
 
     File tempFile;
