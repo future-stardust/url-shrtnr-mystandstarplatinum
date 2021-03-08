@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 public class StorageFactory {
   private static final Logger logger = LoggerFactory.getLogger(StorageFactory.class);
   private static final ReentrantLock initLock = new ReentrantLock();
-  private static Storage storage = null;
+  private static volatile Storage storage = null;
 
   @Singleton
   Storage storage() {
