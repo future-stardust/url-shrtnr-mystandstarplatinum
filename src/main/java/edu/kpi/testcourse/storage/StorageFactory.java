@@ -21,7 +21,8 @@ public class StorageFactory {
       boolean locked = initLock.tryLock();
       if (locked) {  // we need to init storage in this thread
         try {
-          storage = new StorageImpl();
+          StorageBuilder builder = new StorageBuilder();
+          storage = builder.build();
         } finally {
           initLock.unlock();
         }

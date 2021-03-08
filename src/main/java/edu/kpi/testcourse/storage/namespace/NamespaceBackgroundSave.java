@@ -25,6 +25,15 @@ public class NamespaceBackgroundSave implements Runnable {
     FileSystemLayer fsLayer = beanContext.getBean(FileSystemLayer.class);
     String basePath = ns.getDataPath();
 
+    if (fsLayer.exists(basePath) && !fsLayer.isDirectory(basePath)) {
+      logger.error("{} dir is not a directory, cannot save data of {}", basePath, ns.getName());
+      return;
+    }
+    if (!fsLayer.exists(basePath)) {
+      logger.info("Creating {} for {} namespace", basePath, ns.getName());
+      fsLayer.mkdir(ns.getDataPath());
+    }
+
     Integer[] segments = this.ns.popModified();
     logger.info("NS {}: saving {} segments to disk", ns.getName(), segments.length);
 

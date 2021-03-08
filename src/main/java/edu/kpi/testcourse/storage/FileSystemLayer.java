@@ -2,9 +2,12 @@ package edu.kpi.testcourse.storage;
 
 import io.micronaut.context.annotation.Prototype;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -90,5 +93,34 @@ public class FileSystemLayer {
         logger.error("Could not delete temp file {}: {}", temp.toString(), e.getMessage());
       }
     }
+  }
+
+  /**
+   * Reads file (Java default serialization) to object of requested type.
+   *
+   * @param basePath directory to search file in
+   * @param fileName file to search in directory
+   * @param <T> Type which should be returned
+   * @return object of requested type
+   */
+  public <T extends Serializable> T readToObject(String basePath, String fileName)
+      throws IOException, ClassNotFoundException {
+    File file = Paths.get(basePath, fileName).toFile();
+    FileInputStream fis = new FileInputStream(file);
+    ObjectInputStream ois = new ObjectInputStream(fis);
+
+    return (T) ois.readObject();
+  }
+
+  public boolean exists(String path) {
+    return Paths.get(path).toFile().exists();
+  }
+
+  public String[] list(String path) {
+    return Paths.get(path).toFile().list();
+  }
+
+  public boolean isDirectory(String path) {
+    return Paths.get(path).toFile().isDirectory();
   }
 }

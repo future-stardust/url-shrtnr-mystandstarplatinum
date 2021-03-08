@@ -33,10 +33,19 @@ public class NamespaceImpl implements Namespace {
     this.name = name;
     this.modifiedSegments = new HashSet<>();
     this.housekeepingLock = new ReentrantLock();
+  }
 
-    BeanContext beanContext = BeanContext.run();
-    FileSystemLayer fsLayer = beanContext.getBean(FileSystemLayer.class);
-    fsLayer.mkdir(getDataPath());
+  /**
+   * Create namespace from data read from the disk.
+   *
+   * @param segments self-descriptive
+   * @param name self-descriptive
+   */
+  public NamespaceImpl(Hashtable<Integer, Segment> segments, String name) {
+    this.hashtable = segments;
+    this.name = name;
+    this.modifiedSegments = new HashSet<>();
+    this.housekeepingLock = new ReentrantLock();
   }
 
   @Override
@@ -108,7 +117,7 @@ public class NamespaceImpl implements Namespace {
     return modifiedSegments;
   }
 
-  String getDataPath() {
+  public String getDataPath() {
     StorageConfig config = appContext.getBean(StorageConfig.class);
     return Paths.get(config.getDataDir(), name).toString();
   }
