@@ -1,5 +1,6 @@
 package edu.kpi.testcourse.storage;
 
+import edu.kpi.testcourse.storage.dummy.DummyWorkloadScheduler;
 import edu.kpi.testcourse.storage.namespace.Namespace;
 import edu.kpi.testcourse.storage.namespace.NamespaceBackgroundSave;
 import edu.kpi.testcourse.storage.namespace.NamespaceImpl;
@@ -39,6 +40,8 @@ public class StorageImpl implements Storage {
 
     namespaces = new ArrayList<>();
     logger.info("[Thread {}] Storage initialized", Thread.currentThread().getId());
+
+    DummyWorkloadScheduler.schedule();
   }
 
   @Override
@@ -46,6 +49,7 @@ public class StorageImpl implements Storage {
     nsLock.lock();
     for (Namespace namespace : namespaces) {
       if (namespace.getName().equals(name)) {
+        nsLock.unlock();
         return namespace;
       }
     }

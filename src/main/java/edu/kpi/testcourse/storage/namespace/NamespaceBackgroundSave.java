@@ -26,6 +26,7 @@ public class NamespaceBackgroundSave implements Runnable {
     String basePath = ns.getDataPath();
 
     Integer[] segments = this.ns.popModified();
+    logger.info("NS {}: saving {} segments to disk", ns.getName(), segments.length);
 
     for (Integer segmentId : segments) {
       String name = String.format("%d.ser", segmentId);
@@ -36,7 +37,6 @@ public class NamespaceBackgroundSave implements Runnable {
         return;
       }
 
-      logger.info("NS {}: saving {} segments to disk", ns.getName(), segments.length);
       fsLayer.safeWriteSerializable(basePath, name, segment);
     }
 

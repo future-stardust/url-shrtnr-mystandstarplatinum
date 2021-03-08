@@ -1,7 +1,9 @@
 package edu.kpi.testcourse.storage.namespace;
 
+import edu.kpi.testcourse.storage.FileSystemLayer;
 import edu.kpi.testcourse.storage.StorageConfig;
 import io.micronaut.context.ApplicationContext;
+import io.micronaut.context.BeanContext;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -31,6 +33,10 @@ public class NamespaceImpl implements Namespace {
     this.name = name;
     this.modifiedSegments = new HashSet<>();
     this.housekeepingLock = new ReentrantLock();
+
+    BeanContext beanContext = BeanContext.run();
+    FileSystemLayer fsLayer = beanContext.getBean(FileSystemLayer.class);
+    fsLayer.mkdir(getDataPath());
   }
 
   @Override

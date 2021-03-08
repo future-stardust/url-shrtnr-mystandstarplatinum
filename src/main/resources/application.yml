@@ -19,3 +19,10 @@ my:
     backupDir: ".volumes/backup"
     backupPeriodSeconds: 3600
     maxBackups: 10
+    testing:
+      enabled: false
+      randomFill:
+        enabled: true
+        namespaces: [auth, default, url]
+        periodSeconds: 3
+        insertionCount: 100
