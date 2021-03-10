@@ -41,7 +41,7 @@ public class UrlEntity {
    * @throws IllegalArgumentException if url is malformed
    */
   public UrlEntity(String url) throws IllegalArgumentException {
-    this(url, UUID.randomUUID().toString().replaceAll("-", ""));
+    this(url, Uuid64.hexToBase64(UUID.randomUUID().toString()));
   }
 
   /**

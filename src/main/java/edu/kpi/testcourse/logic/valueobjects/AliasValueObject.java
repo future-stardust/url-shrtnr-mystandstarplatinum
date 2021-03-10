@@ -1,9 +1,12 @@
 package edu.kpi.testcourse.logic.valueobjects;
 
+import java.util.regex.Pattern;
+
 /**
  * Value Object that describes alias business logic constraints.
  */
 public class AliasValueObject implements ValueObject<String> {
+  private static final String URL_SAVE_PATTERN = "^([a-zA-Z0-9_-]+)$";
   private final String value;
 
   /**
@@ -22,7 +25,7 @@ public class AliasValueObject implements ValueObject<String> {
    */
   @Override
   public boolean isValid() {
-    return value != null && value.chars().allMatch(Character::isLetterOrDigit);
+    return value != null && Pattern.matches(URL_SAVE_PATTERN, value);
   }
 
   /**
