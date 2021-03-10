@@ -1,7 +1,6 @@
 package edu.kpi.testcourse.logic.repositories;
 
 import edu.kpi.testcourse.logic.entities.UrlEntity;
-import java.util.List;
 
 /**
  * The Data Access Object for the UrlEntity.
@@ -24,7 +23,7 @@ public interface UrlRepository {
    *
    * @param alias by which the search is made
    *
-   * @return UrlEntity instance
+   * @return UrlEntity instance or null if there is no entity with given alias
    */
   UrlEntity read(String alias);
 
@@ -35,7 +34,7 @@ public interface UrlRepository {
    *
    * @return List of URL Entities
    */
-  List<UrlEntity> readMany(String email);
+  UrlEntity[] readMany(String email);
 
   /**
    * Deletes URL Entity.
@@ -44,7 +43,7 @@ public interface UrlRepository {
    *
    * @param alias of the entity that should be delete
    *
-   * @return true if the delete operation was successful
+   * @return true if we found data for the delete and successfully delete it
    */
   boolean delete(String email, String alias);
 }
