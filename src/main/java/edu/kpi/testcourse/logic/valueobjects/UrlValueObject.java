@@ -1,14 +1,13 @@
 package edu.kpi.testcourse.logic.valueobjects;
 
-import java.util.regex.Pattern;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 /**
  * Value Object that describes long URL business logic constraints.
  */
 public class UrlValueObject implements ValueObject<String> {
-
-  private static final String URL_PATTERN = "^(https://|http://|ftp://|ftps://)(?!-.)"
-        + "[^\\\\s/\\$.?#].[^\\\\s]*$";
 
   private final String value;
 
@@ -38,6 +37,11 @@ public class UrlValueObject implements ValueObject<String> {
    */
   @Override
   public boolean isValid() {
-    return Pattern.matches(URL_PATTERN, value);
+    try {
+      new URL(value).toURI();
+    } catch (MalformedURLException | URISyntaxException e) {
+      return false;
+    }
+    return true;
   }
 }

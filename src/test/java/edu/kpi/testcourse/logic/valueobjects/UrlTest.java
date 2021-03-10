@@ -19,7 +19,7 @@ public class UrlTest {
   }
 
   @ParameterizedTest
-  @ValueSource(strings = {"dfsdfsdfsdf", "htlp://google.com", "http:/google.com"})
+  @ValueSource(strings = {"dfsdfsdfsdf", "htlp://google.com", "https://not url"})
   void shouldCreateInvalidValObj_whenIncorrectUrl(String url) {
     var urlValObj = new UrlValueObject(url);
 

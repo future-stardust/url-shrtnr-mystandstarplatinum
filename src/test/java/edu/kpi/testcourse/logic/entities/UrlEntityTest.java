@@ -37,8 +37,8 @@ public class UrlEntityTest {
   }
 
   @Test
-  void shouldThrowError_whenNotInvalidUrl() {
-    String url = "http:/google.com";
+  void shouldThrowError_whenInvalidUrl() {
+    String url = "httm:/google.com";
     String alias = "alias";
 
     assertThrows(IllegalArgumentException.class, () -> new UrlEntity(url, alias));
