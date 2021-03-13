@@ -16,7 +16,7 @@ public class AuthImpl implements Auth {
     if ((status = checkCredentials(username, password)) != AuthStatus.Ok) {
       return status;
     }
-    if ((status = validateUser(username, password)) != AuthStatus.Ok) {
+    if ((status = registerUser(username, password)) != AuthStatus.Ok) {
       return status;
     }
     return status;
@@ -28,7 +28,7 @@ public class AuthImpl implements Auth {
     if ((status = checkCredentials(username, password)) != AuthStatus.Ok) {
       return status;
     }
-    if ((status = registerUser(username, password)) != AuthStatus.Ok) {
+    if ((status = validateUser(username, password)) != AuthStatus.Ok) {
       return status;
     }
     return status;
