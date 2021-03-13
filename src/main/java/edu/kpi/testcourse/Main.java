@@ -18,6 +18,11 @@ public class Main {
   private static final Gson gson = new Gson();
   private static final Logger logger = LoggerFactory.getLogger(Main.class);
 
+  /**
+   * Main entry point of the application.
+   *
+   * @param args arguments passed to the app
+   */
   public static void main(String[] args) {
     initStorages();
     initAuth();
