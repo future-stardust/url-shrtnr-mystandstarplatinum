@@ -41,7 +41,10 @@ public class AuthImpl implements Auth {
    * @return InvalidUsername or Ok
    */
   private AuthStatus checkUsername(String username) {
-    if (username != null && username.isEmpty()) {
+    if (username == null) {
+      return AuthStatus.InvalidUsername;
+    }
+    if (username.isEmpty()) {
       return AuthStatus.InvalidUsername;
     }
     return AuthStatus.Ok;
@@ -54,7 +57,10 @@ public class AuthImpl implements Auth {
    * @return InvalidPassword or Ok
    */
   private AuthStatus checkPassword(String password) {
-    if (password != null && password.isEmpty()) {
+    if (password == null) {
+      return AuthStatus.InvalidPassword;
+    }
+    if (password.isEmpty()) {
       return AuthStatus.InvalidPassword;
     }
     return AuthStatus.Ok;
