@@ -2,9 +2,17 @@ package edu.kpi.testcourse.auth;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import edu.kpi.testcourse.Main;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 class AuthImplTest {
+
+  @AfterEach
+  void deleteDummiesFromAuthStorage() {
+    Main.getAuthStorage().delete("vasya");
+    Main.getAuthStorage().delete("dude");
+  }
 
   @Test
   void testCreateUser() {
