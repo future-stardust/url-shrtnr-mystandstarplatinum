@@ -31,8 +31,8 @@ public class AuthenticationProviderUserPassword implements AuthenticationProvide
   ) {
     return Flowable.create(emitter -> {
       Auth auth = Main.getAuth();
-      var username = (String) authenticationRequest.getIdentity();
-      var password = (String) authenticationRequest.getSecret();
+      String username = (String) authenticationRequest.getIdentity();
+      String password = (String) authenticationRequest.getSecret();
       AuthStatus authStatus = auth.loginUser(username, password);
       if (authStatus == AuthStatus.Ok) {
         emitter
