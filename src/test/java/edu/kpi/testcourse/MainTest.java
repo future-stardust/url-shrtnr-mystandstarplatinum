@@ -22,4 +22,13 @@ public class MainTest {
 
     assertThat(ns1).isSameAs(ns2);
   }
+
+  @Test
+  void testGetAuthReturnsSameObject() {
+    var auth1 = Main.getAuth();
+
+    var auth2 = Main.getAuth();
+
+    assertThat(auth1).isSameAs(auth2);
+  }
 }

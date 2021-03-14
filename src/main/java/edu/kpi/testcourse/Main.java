@@ -1,6 +1,7 @@
 package edu.kpi.testcourse;
 
 import com.google.gson.Gson;
+import edu.kpi.testcourse.auth.Auth;
 import edu.kpi.testcourse.storage.Storage;
 import edu.kpi.testcourse.storage.namespace.Namespace;
 import io.micronaut.context.BeanContext;
@@ -17,8 +18,14 @@ public class Main {
   private static final Gson gson = new Gson();
   private static final Logger logger = LoggerFactory.getLogger(Main.class);
 
+  /**
+   * Main entry point of the application.
+   *
+   * @param args arguments passed to the app
+   */
   public static void main(String[] args) {
     initStorages();
+    initAuth();
     Micronaut.run(Main.class, args);
   }
 
@@ -35,6 +42,13 @@ public class Main {
     getDefaultStorage();
     getAuthStorage();
     getUrlStorage();
+  }
+
+  /**
+   * Method purpose is to create all authentication related stuff on application startup.
+   */
+  public static void initAuth() {
+    getAuth();
   }
 
   /**
@@ -74,5 +88,15 @@ public class Main {
    */
   public static Namespace getUrlStorage() {
     return Main.getStorage().getOrCreateNamespace("url");
+  }
+
+  /**
+   * Get Authentication service.
+   *
+   * @return Auth bean
+   */
+  public static Auth getAuth() {
+    BeanContext ctx = BeanContext.run();
+    return ctx.getBean(Auth.class);
   }
 }
