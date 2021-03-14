@@ -39,3 +39,7 @@ local.properties
 
 # Cache of project
 .gradletasknamecache
+
+# Serialized Object File
+*.ser
+*.ser.tmp
