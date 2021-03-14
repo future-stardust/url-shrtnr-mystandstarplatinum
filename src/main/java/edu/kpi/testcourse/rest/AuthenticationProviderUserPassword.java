@@ -1,5 +1,8 @@
 package edu.kpi.testcourse.rest;
 
+import edu.kpi.testcourse.Main;
+import edu.kpi.testcourse.auth.Auth;
+import edu.kpi.testcourse.auth.AuthStatus;
 import edu.umd.cs.findbugs.annotations.Nullable;
 import io.micronaut.http.HttpRequest;
 import io.micronaut.security.authentication.AuthenticationException;
@@ -26,11 +29,12 @@ public class AuthenticationProviderUserPassword implements AuthenticationProvide
       @Nullable HttpRequest<?> httpRequest,
       AuthenticationRequest<?, ?> authenticationRequest
   ) {
-    // TODO Here you need to implement an actual authentication (ensure that the user is registered
-    //  and password is OK)
     return Flowable.create(emitter -> {
-      if (authenticationRequest.getIdentity().equals("sherlock")
-          && authenticationRequest.getSecret().equals("password")) {
+      Auth auth = Main.getAuth();
+      var username = (String) authenticationRequest.getIdentity();
+      var password = (String) authenticationRequest.getSecret();
+      AuthStatus authStatus = auth.loginUser(username, password);
+      if (authStatus == AuthStatus.Ok) {
         emitter
           .onNext(new UserDetails((String) authenticationRequest.getIdentity(), new ArrayList<>()));
         emitter.onComplete();
