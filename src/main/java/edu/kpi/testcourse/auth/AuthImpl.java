@@ -79,10 +79,10 @@ public class AuthImpl implements Auth {
       return AuthStatus.InvalidCredentials;
     }
     if (usernameStatus != AuthStatus.Ok) {
-      return AuthStatus.InvalidUsername;
+      return usernameStatus;
     }
     if (passwordStatus != AuthStatus.Ok) {
-      return AuthStatus.InvalidPassword;
+      return passwordStatus;
     }
     return AuthStatus.Ok;
   }
