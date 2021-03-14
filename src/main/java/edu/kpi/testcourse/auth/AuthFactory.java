@@ -16,7 +16,7 @@ public class AuthFactory {
    * @return Auth instance
    */
   @Singleton
-  Auth auth() {
+  synchronized Auth auth() {
     if (auth == null) {
       auth = new AuthImpl();
     }
